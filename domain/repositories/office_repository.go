@@ -4,7 +4,6 @@ import (
 	"database/sql"
 
 	"github.com/sgash708/scraping_lawyers/domain"
-	// _ "github.com/sgash708/scraping_lawyers/domain"
 )
 
 // OfficeRepository officeリポジトリ
