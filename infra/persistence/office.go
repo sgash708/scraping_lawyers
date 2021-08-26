@@ -18,12 +18,12 @@ type OfficePersistence struct{}
 // NewOfficePersistence
 func NewOfficePersistence() repositories.OfficeRepository {
 	/*
-		①OfficeRepositoryはGetIDCountとInsert関数を持っている。
-		②officePersistenceをレシーバに持つGetIDCount関数とInsert関数を実装する。
-		③officePersistenceがinterfaceのOfficeRepositoryを満たしていることになる。
-		④interfaceの性質上、（今回に関してはレシーバの）型は不問。
-		⑤返り値はOfficeRepositoryというinterfaceなのでそれを満たしているので返り値として満たされる。
-	*/
+	 * ①OfficeRepositoryはGetIDCountとInsert関数を持っている。
+	 * ②officePersistenceをレシーバに持つGetIDCount関数とInsert関数を実装する。
+	 * ③officePersistenceがinterfaceのOfficeRepositoryを満たしていることになる。
+	 * ④interfaceの性質上、（今回に関してはレシーバの）型は不問。
+	 * ⑤返り値はOfficeRepositoryというinterfaceなのでそれを満たしているので返り値として満たされる。
+	 */
 	return &OfficePersistence{}
 }
 
