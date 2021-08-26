@@ -48,6 +48,7 @@ func NewConfigDB(dbPort, sshPort int, sshHost, sshUser, sshPassword, dbHost, dbU
 	}
 }
 
+// Init 接続処理
 func (d *ConfigDB) Init() (*sql.DB, error) {
 	signer, err := ssh.ParsePrivateKey([]byte(d.SSHPassword))
 	if err != nil {
