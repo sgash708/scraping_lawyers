@@ -15,6 +15,12 @@ var db *sql.DB
 // con OverSSHConnection
 var con *ssh.Client
 
+// tcp
+var tcp = "tcp"
+
+// msql
+var msql = "mysql"
+
 type ConfigDB struct {
 	SSHHost     string
 	SSHPort     int
@@ -54,18 +60,18 @@ func (d *ConfigDB) Init() (*sql.DB, error) {
 			ssh.PublicKeys(signer),
 		},
 	}
-	con, err := ssh.Dial("tcp", fmt.Sprintf("%s:%d", d.SSHHost, d.SSHPort), sshConfig)
+	con, err := ssh.Dial(tcp, fmt.Sprintf("%s:%d", d.SSHHost, d.SSHPort), sshConfig)
 	if err != nil {
 		return nil, err
 	}
-	dialNet := "mysql+tcp"
+	dialNet := msql + "+" + tcp
 	dialFunc := func(addr string) (net.Conn, error) {
-		return con.Dial("tcp", addr)
+		return con.Dial(tcp, addr)
 	}
 	mysql.RegisterDial(dialNet, dialFunc)
 
 	dsn := fmt.Sprintf("%s:%s@%s(%s:%d)/%s", d.DBUser, d.DBPassword, dialNet, d.DBHost, d.DBPort, d.Name)
-	db, err := sql.Open("mysql", dsn)
+	db, err := sql.Open(msql, dsn)
 	if err != nil {
 		d.CloseSshAndDB()
 		return nil, err
