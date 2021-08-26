@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/sgash708/scraping_lawyers/domain"
-	"github.com/sgash708/scraping_lawyers/domain/repositories"
+	"github.com/sgash708/scraping_lawyers/domain/model"
+	"github.com/sgash708/scraping_lawyers/domain/repository"
 )
 
 // count
@@ -16,7 +16,7 @@ var count string
 type OfficePersistence struct{}
 
 // NewOfficePersistence
-func NewOfficePersistence() repositories.OfficeRepository {
+func NewOfficePersistence() repository.OfficeRepository {
 	/*
 	 * ①OfficeRepositoryはGetIDCountとInsert関数を持っている。
 	 * ②officePersistenceをレシーバに持つGetIDCount関数とInsert関数を実装する。
@@ -87,8 +87,8 @@ func (d *OfficePersistence) Insert(db *sql.DB, datas map[int]map[string]string) 
 }
 
 // GetIDCount IDの数カウントする
-func (d *OfficePersistence) GetIDCount(db *sql.DB, tableName string) (*domain.Office, error) {
-	office := domain.Office{}
+func (d *OfficePersistence) GetIDCount(db *sql.DB, tableName string) (*model.Office, error) {
+	office := model.Office{}
 	if err := db.QueryRow(fmt.Sprintf("SELECT COUNT(id) as count FROM nichibenren.%s", tableName)).Scan(&count); err != nil {
 		return nil, err
 	}

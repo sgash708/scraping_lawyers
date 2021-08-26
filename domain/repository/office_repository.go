@@ -1,9 +1,9 @@
-package repositories
+package repository
 
 import (
 	"database/sql"
 
-	"github.com/sgash708/scraping_lawyers/domain"
+	"github.com/sgash708/scraping_lawyers/domain/model"
 )
 
 // OfficeRepository officeリポジトリ
@@ -12,5 +12,5 @@ type OfficeRepository interface {
 	// データ挿入
 	Insert(DB *sql.DB, datas map[int]map[string]string) (int, error)
 	// ID数カウント
-	GetIDCount(DB *sql.DB, tableName string) (*domain.Office, error)
+	GetIDCount(DB *sql.DB, tableName string) (*model.Office, error)
 }

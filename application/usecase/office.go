@@ -3,22 +3,22 @@ package usecase
 import (
 	"database/sql"
 
-	"github.com/sgash708/scraping_lawyers/domain"
-	"github.com/sgash708/scraping_lawyers/domain/repositories"
+	"github.com/sgash708/scraping_lawyers/domain/model"
+	"github.com/sgash708/scraping_lawyers/domain/repository"
 )
 
-// OfficeUseCase OffceのUseCaseインターフェース
+// OfficeUseCase UseCaseインターフェース
 type OfficeUseCase interface {
 	Insert(DB *sql.DB, datas map[int]map[string]string) (int, error)
 }
 
-// officeUseCase repositoriesのstruct
+// officeUseCase UseCaseにrepositoryの構造体を注入
 type officeUseCase struct {
-	officeRepository repositories.OfficeRepository
+	officeRepository repository.OfficeRepository
 }
 
 // NewUserUseCase 初期化
-func NewUserUseCase(officeRepo repositories.OfficeRepository) OfficeUseCase {
+func NewUserUseCase(officeRepo repository.OfficeRepository) OfficeUseCase {
 	return &officeUseCase{
 		officeRepository: officeRepo,
 	}
@@ -37,7 +37,7 @@ func (ou *officeUseCase) Insert(DB *sql.DB, datas map[int]map[string]string) (in
 }
 
 // GetIDCount repositoryからGetIDCount関数呼びだす
-func (ou *officeUseCase) GetIDCount(db *sql.DB, tableName string) (*domain.Office, error) {
+func (ou *officeUseCase) GetIDCount(db *sql.DB, tableName string) (*model.Office, error) {
 	office, err := ou.officeRepository.GetIDCount(db, tableName)
 	if err != nil {
 		return nil, err
