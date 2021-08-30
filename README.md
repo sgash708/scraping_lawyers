@@ -5,9 +5,9 @@
 # 技術
 * golang ver1.16
 * MySQL 5.7
+* ChromeDriver
 
 # DDDについて
-
 ## domain層
 * ビジネスロジックを記述
 * DBアクセスなどの技術的な実装はさせない

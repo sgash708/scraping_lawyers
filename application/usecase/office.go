@@ -10,6 +10,7 @@ import (
 // OfficeUseCase UseCaseインターフェース
 type OfficeUseCase interface {
 	Insert(DB *sql.DB, datas map[int]map[string]string) (int, error)
+	GetIDCount(DB *sql.DB, tableName string) (*model.Office, error)
 }
 
 // officeUseCase UseCaseにrepositoryの構造体を注入
@@ -37,8 +38,8 @@ func (ou *officeUseCase) Insert(DB *sql.DB, datas map[int]map[string]string) (in
 }
 
 // GetIDCount repositoryからGetIDCount関数呼びだす
-func (ou *officeUseCase) GetIDCount(db *sql.DB, tableName string) (*model.Office, error) {
-	office, err := ou.officeRepository.GetIDCount(db, tableName)
+func (ou *officeUseCase) GetIDCount(DB *sql.DB, tableName string) (*model.Office, error) {
+	office, err := ou.officeRepository.GetIDCount(DB, tableName)
 	if err != nil {
 		return nil, err
 	}
